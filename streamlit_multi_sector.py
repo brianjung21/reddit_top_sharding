@@ -189,9 +189,32 @@ with st.sidebar:
     # Sector toggle
     sector = st.selectbox(T(lang, "sector"), options=list(SECTORS.keys()), index=0)
 
-    # Load sector data
+    # Load sector data paths
     pivot_path, raw_path = sector_paths(sector)
     st.caption(f"{T(lang, 'data_folder')}: {pivot_path.parent}")
+
+    # Quick existence checks to avoid silent loops on Streamlit Cloud
+    pivot_exists = pivot_path.exists()
+    raw_exists = raw_path.exists()
+
+    if not pivot_exists or not raw_exists:
+        st.error(
+            f"Missing required data file(s) for sector '{sector}'.\n\n"
+            f"• pivot: {pivot_path} — {'FOUND' if pivot_exists else 'NOT FOUND'}\n"
+            f"• raw:   {raw_path} — {'FOUND' if raw_exists else 'NOT FOUND'}\n\n"
+            f"Make sure your repo includes these CSVs under the sector's data/ folder."
+        )
+        with st.expander("Debug info"):
+            st.write({
+                "BASE_DIR": str(BASE_DIR),
+                "sector_root": str(SECTORS.get(sector)),
+                "data_dir": str(pivot_path.parent),
+            })
+            try:
+                st.write("data_dir contents:", sorted(p.name for p in pivot_path.parent.iterdir()))
+            except Exception as e:
+                st.write("(could not list data_dir)", e)
+        st.stop()
 
     # Frequency toggle
     freq_label = st.radio(T(lang, "frequency"), [T(lang, "freq_daily"), T(lang, "freq_weekly")],
@@ -199,7 +222,12 @@ with st.sidebar:
     freq = "D" if freq_label == T(lang, "freq_daily") else "W"
 
     # Load pivot & resample
-    df = load_pivot(pivot_path)
+    try:
+        df = load_pivot(pivot_path)
+    except Exception as e:
+        st.error(f"Failed to load pivot file: {pivot_path}\n{e}")
+        st.stop()
+
     all_brands = [c for c in df.columns if c != "date"]
     df_freq = resample_freq(df, freq)
 
@@ -333,7 +361,17 @@ try:
     else:
         st.info(T(lang, "no_data"))
 except Exception as e:
-    st.warning(f"Subreddit section unavailable: {e}")
+    st.warning(f"Subreddit section unavailable. Failed to load or parse: {raw_path}\n{e}")
+
+with st.expander("Environment / Debug"):
+    st.write({
+        "Python": __import__('sys').version,
+        "Working dir": str(Path.cwd()),
+        "App base": str(BASE_DIR),
+        "Sector": sector,
+        "Pivot file": str(pivot_path),
+        "Raw file": str(raw_path),
+    })
 
 with st.expander(T(lang, "show_data_table")):
     st.dataframe(df_metric[["date"] + selected], use_container_width=True)
