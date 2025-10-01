@@ -83,13 +83,13 @@ CUE_TOP_TFIDF_PCT = 0.10         # keep top 10% by tf-idf (if column present)
 CUE_MAX_TERMS = 2000             # safety cap on number of cue terms compiled
 
 # Reddit credentials (directly defined)
-CLIENT_ID = "GHBnVWNi9oton50-H7IRMQ"
-CLIENT_SECRET = "DCgsCWWyDq1UUS629RFl7Wxy8IXnyA"
-USER_AGENT = "research"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
+USER_AGENT = ""
 
 # Pushover credentials
-PUSHOVER_USER_KEY = "uy76bm9vr7w74cgz4hr69epfb9q9sb"
-PUSHOVER_API_TOKEN = "aze67tfyszw84ozjtn1nc7bffzccg5"
+PUSHOVER_USER_KEY = ""
+PUSHOVER_API_TOKEN = ""
 
 # --------------------------
 # Helpers
