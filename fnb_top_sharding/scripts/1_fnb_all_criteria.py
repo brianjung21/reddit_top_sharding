@@ -64,13 +64,13 @@ FINAL_FILES = {
 }
 
 # Reddit credentials (directly defined)
-CLIENT_ID = "jXSqZI8sbn-S_4B3UN5FyQ"
-CLIENT_SECRET = "yau_SLpSMTGo8otUPezxZASo29ysww"
-USER_AGENT = "research"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
+USER_AGENT = ""
 
 # Pushover credentials
-PUSHOVER_USER_KEY = "uy76bm9vr7w74cgz4hr69epfb9q9sb"
-PUSHOVER_API_TOKEN = "aze67tfyszw84ozjtn1nc7bffzccg5"
+PUSHOVER_USER_KEY = ""
+PUSHOVER_API_TOKEN = ""
 
 # --------------------------
 # Helpers
