@@ -1,0 +1,30 @@
+==== STDOUT (3) Extract important terms) ====
+Saved top terms to /Users/sanghoonjung/PycharmProjects/PythonProject/beauty_reddit/top_sharding/data/sector_terms.csv
+           term  frequency  tfidf_score
+21347      skin      15855   349.833406
+14740        ml      14226   145.518110
+5270      cream      11457   212.732135
+13973      mask       9118   149.470681
+20826     serum       7612   173.158799
+13086      like       7338   178.418756
+15531       new       6092   131.624692
+24832      used       5847   139.028977
+16161       one       5673   144.750828
+24829       use       5106   168.546395
+18208  products       4944   165.654533
+23833     toner       4847   140.564452
+13171       lip       4746   129.789867
+8095       face       4715   116.385306
+2112     beauty       4550   122.978504
+16065       oil       4495    89.872561
+744        also       4244   120.616907
+11749      iptv       4084     2.983757
+4221   cleanser       4012   116.689218
+25526     water       3947    84.674902
+
+
+==== STDERR (3) Extract important terms) ====
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/sanghoonjung/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+

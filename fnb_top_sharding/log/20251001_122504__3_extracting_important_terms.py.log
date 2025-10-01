@@ -1,0 +1,30 @@
+==== STDOUT (3) Extract important terms) ====
+Saved top terms to /Users/sanghoonjung/PycharmProjects/PythonProject/fnb_reddit/top_sharding/data/sector_terms.csv
+          term  frequency  tfidf_score
+8903      like       2490    82.832520
+10464       ng       2326    14.835381
+10855      one       1782    62.085981
+12407    ramen       1738   138.936297
+10476       nh       1390     5.830705
+15705       th       1353    14.048676
+17371    would       1335    42.707089
+15861     time       1314    47.757479
+6447      good       1313    60.147923
+457       also       1291    41.193696
+5952      free       1224    25.210830
+6277       get       1202    43.912759
+3872      davo       1134     5.980887
+8723        lb       1107    11.747046
+8511    korean       1089    56.096603
+10445      new       1026    38.615990
+2814       cib        993     7.589287
+9111      love        990    37.837824
+10587  noodles        986    61.208131
+3882       day        983    30.386486
+
+
+==== STDERR (3) Extract important terms) ====
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/sanghoonjung/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+

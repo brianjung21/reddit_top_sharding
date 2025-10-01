@@ -1,0 +1,8 @@
+==== STDOUT (5) Pivot results) ====
+Done. Wrote:
+  posts -> /Users/sanghoonjung/PycharmProjects/PythonProject/beauty_reddit/top_sharding/data/reddit_brand_pivoted.csv
+  yesterday -> /Users/sanghoonjung/PycharmProjects/PythonProject/beauty_reddit/top_sharding/data/brand_counts_2025-09-30.csv
+
+
+==== STDERR (5) Pivot results) ====
+

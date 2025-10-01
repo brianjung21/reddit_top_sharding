@@ -1,0 +1,34 @@
+==== STDOUT (3) Extract important terms) ====
+Saved top terms to /Users/sanghoonjung/PycharmProjects/PythonProject/kpop_reddit/top_sharding/data/sector_terms.csv
+           term  frequency  tfidf_score
+7505       like       2650   104.154472
+2470   comments       2367    37.089862
+8645      music       2225    83.643855
+7191       kpop       1945    55.097774
+5454      group       1841    76.269478
+9249        one       1773    79.538790
+12207      song       1613    79.530262
+390        also       1487    53.519753
+321       album       1464   113.854531
+3084        day       1461   104.085615
+9956        pop       1382    46.909978
+13292      time       1289    54.977099
+7698       love       1285    80.359790
+5456     groups       1279    66.750036
+13151        th       1246    71.459110
+8872        new       1244    82.776671
+12212     songs       1217    57.427217
+14590     would       1197    59.392584
+7151       know       1157    66.724844
+13200     think       1064    51.870961
+
+
+==== STDERR (3) Extract important terms) ====
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/sanghoonjung/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+/opt/anaconda3/envs/python391/lib/python3.9/site-packages/sklearn/feature_extraction/text.py:402: UserWarning:
+
+Your stop_words may be inconsistent with your preprocessing. Tokenizing the stop words generated tokens ['team'] not in stop_words.
+
+
