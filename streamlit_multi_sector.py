@@ -95,9 +95,9 @@ def T(lang: str, key: str) -> str:
 # Map sectors to their base directories relative to THIS file
 BASE_DIR = Path(__file__).parent.resolve()
 SECTORS = {
-    "beauty": BASE_DIR / "beauty_top_sharding",
-    "fnb":    BASE_DIR / "fnb_top_sharding",
-    "kpop":   BASE_DIR / "kpop_top_sharding",
+    "beauty": "beauty_top_sharding/data",
+    "fnb":    "fnb_top_sharding/data",
+    "kpop":   "kpop_top_sharding/data",
 }
 
 DEFAULT_TOPN = 5
@@ -108,14 +108,36 @@ st.set_page_config(page_title=T("en", "title"), layout="wide")
 # Helpers
 # -----------------------------
 def sector_paths(sector: str) -> Tuple[Path, Path]:
-    """Return pivot and raw paths for a given sector."""
-    root = SECTORS.get(sector)
-    if not root:
+    """Return pivot and raw CSV paths for a given sector, trying simple relative locations.
+    Tries:
+      1) Path.cwd() / SECTORS[sector]
+      2) Path(__file__).parent / SECTORS[sector]
+    Returns the first candidate pair; even if files are missing, paths are resolved for clear errors upstream.
+    """
+    rel = SECTORS.get(sector)
+    if not rel:
         raise ValueError(f"Unknown sector: {sector}")
-    data_dir = (root / "data").resolve()
-    pivot = data_dir / "reddit_brand_pivoted.csv"
-    raw = data_dir / "reddit_brand_harvest_top_month.csv"
-    return pivot, raw
+
+    candidates = [
+        (Path.cwd() / rel),
+        (Path(__file__).parent / rel),
+    ]
+
+    chosen = None
+    for cand in candidates:
+        data_dir = cand.resolve()
+        pivot = data_dir / "reddit_brand_pivoted.csv"
+        raw = data_dir / "reddit_brand_harvest_top_month.csv"
+        # If either file exists here, use this base
+        if pivot.exists() or raw.exists():
+            chosen = (pivot, raw)
+            break
+    if chosen is None:
+        # Fall back to the first candidate (resolved) for clearer error messages
+        data_dir = (Path.cwd() / rel).resolve()
+        chosen = (data_dir / "reddit_brand_pivoted.csv", data_dir / "reddit_brand_harvest_top_month.csv")
+
+    return chosen
 
 @st.cache_data(show_spinner=False)
 def load_pivot(pivot_path: Path) -> pd.DataFrame:
@@ -206,9 +228,10 @@ with st.sidebar:
         )
         with st.expander("Debug info"):
             st.write({
-                "BASE_DIR": str(BASE_DIR),
-                "sector_root": str(SECTORS.get(sector)),
-                "data_dir": str(pivot_path.parent),
+                "BASE_DIR (__file__)": str(BASE_DIR),
+                "CWD": str(Path.cwd()),
+                "sector_rel": SECTORS.get(sector),
+                "resolved_data_dir": str(pivot_path.parent),
             })
             try:
                 st.write("data_dir contents:", sorted(p.name for p in pivot_path.parent.iterdir()))
